@@ -22,18 +22,85 @@ public:
 
         return atof(intString);
     }
+
+    static string ldtoms(double number) {
+        string startString = to_string(number);
+        string resultString = "$";
+        bool firstIndexWasPass = true;
+        unsigned long position = 0;
+        for (const auto &item: startString) {
+            if (item == '.') {
+                break;
+            }
+
+            if ((position % 3) == 0 && position != 0) {
+                resultString.push_back(',');
+            }
+
+            if (position == 1 && firstIndexWasPass) {
+                resultString.push_back(',');
+                position--;
+                firstIndexWasPass = false;
+            }
+
+            resultString += item;
+            position++;
+        }
+
+        if (position < 3) {
+            resultString.replace(2, 1, "");
+        }
+
+        resultString += '\0';
+
+        return resultString;
+    }
+};
+
+class BMoney {
+private:
+    double money;
+public:
+    BMoney() : money(0.0) {}
+
+    explicit BMoney(const char s[]) {
+        money = Money::mstold(s);
+    };
+
+    void showMoney() const {
+        cout << Money::ldtoms(money) << endl;
+    }
+
+    [[nodiscard]] double getMoney() const {
+        return money;
+    }
+
+    void putMoney() {
+        cout << "Print money: " << endl;
+        char userMoney[100];
+        cin.get(userMoney, 100);
+
+        money = Money::mstold(userMoney);
+
+        cout << "Money was successfully save" << endl;
+    }
+
+    void addMoney(BMoney m) {
+        money += m.getMoney();
+    }
 };
 
 int main() {
-    Money money{};
-    char userMoneyString[100];
+    BMoney first, second("200$");
+    first.putMoney();
 
-    cout << "Print money";
-    cin.get(userMoneyString, 100);
+    first.addMoney(second);
 
-    double moneyInt = Money::mstold(userMoneyString);
+    cout << "First: ";
+    first.showMoney();
+    cout << "Second: ";
+    second.showMoney();
 
-    cout << moneyInt << endl;
 }
 
 bool isNumericChar(char c) {

@@ -33,6 +33,8 @@ add_executable(array_max src/chapter_7/max_number.cpp)
 add_executable(money src/chapter_7/money.cpp)
 add_executable(safe_array src/chapter_7/safeArray.cpp)
 add_executable(transfer_object src/chapter_7/test_transfer_object.cpp)
+add_executable(queue src/chapter_7/queue.cpp)
+add_executable(matrix src/chapter_7/matrix.cpp)
 
 find_package(fmt REQUIRED)
 if (fmt_FOUND)
