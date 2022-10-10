@@ -35,6 +35,8 @@ add_executable(safe_array src/chapter_7/safeArray.cpp)
 add_executable(transfer_object src/chapter_7/test_transfer_object.cpp)
 add_executable(queue src/chapter_7/queue.cpp)
 add_executable(matrix src/chapter_7/matrix.cpp)
+add_executable(reload_counter src/chapter_8/reload_counter.cpp)
+add_executable(overloaded_distance src/chapter_8/distance.cpp)
 
 find_package(fmt REQUIRED)
 if (fmt_FOUND)
