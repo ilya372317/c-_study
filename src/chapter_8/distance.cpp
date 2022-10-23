@@ -35,10 +35,44 @@ public:
         Distance newDistance;
         int newFeet = feet + first.getFeet();
         float newInches = inches + first.getInches();
+
+        bool inchesInvalid = true;
+
+        while (inchesInvalid) {
+            if (newInches > 100) {
+                newInches -= 100;
+                newFeet += 1;
+            }
+
+            if (newInches <= 100) {
+                inchesInvalid = false;
+            }
+        }
+
         newDistance.setFeet(newFeet);
         newDistance.setInches(newInches);
 
         return newDistance;
+    }
+
+    Distance operator- (Distance first) const {
+        int newFeet = feet - first.getFeet();
+        float newInches = inches - first.getInches();
+
+        bool inchesInvalid = true;
+
+        while (inchesInvalid) {
+            if (newInches > 100) {
+                newInches -= 100;
+                newFeet += 1;
+            }
+
+            if (newInches <= 100) {
+                inchesInvalid = false;
+            }
+        }
+
+        return {newFeet, newInches};
     }
 };
 
