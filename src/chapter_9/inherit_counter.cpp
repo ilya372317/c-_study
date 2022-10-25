@@ -28,10 +28,21 @@ class CountDn : public Counter
 public:
     CountDn(): Counter() {}
 
-    explicit CountDn(int i): Counter(i) {}
+    explicit CountDn(unsigned int i): Counter(i) {}
 
     Counter operator--() {
         return Counter(--count);
+    }
+};
+
+class PostfixCounter : public CountDn {
+public:
+    PostfixCounter(): CountDn() {}
+
+    explicit PostfixCounter(unsigned int c): CountDn(c) {}
+
+    PostfixCounter operator++(int) {
+        return PostfixCounter(count++);
     }
 };
 
@@ -46,6 +57,11 @@ int main() {
     --countDn;
 
     assertEqualsInt(9, countDn.get_count());
+
+    PostfixCounter postfixCounter(10);
+    postfixCounter++;
+
+    assertEqualsInt(11, postfixCounter.get_count());
 }
 
 void assertEqualsInt(unsigned int expected, unsigned int actual) {
