@@ -30,6 +30,27 @@ public:
     }
 };
 
+class PublicationWithDate : public Publication {
+protected:
+    string date{};
+
+    PublicationWithDate(): Publication() {}
+
+    PublicationWithDate(char* tit, float coast, char* dat) : Publication(tit, coast), date(dat) {}
+
+    void getData() {
+        Publication::getData();
+        cout << "Print date of publication: ";
+        cin.ignore();
+        getline(cin, date);
+    }
+
+    void putData() const {
+        Publication::putData();
+        cout << "publication date: " << date << endl;
+    }
+};
+
 class Sales {
 protected:
     static const int COUNT_OF_SALES = 3;
@@ -58,45 +79,45 @@ public:
     }
 };
 
-class Book : public Publication, public Sales{
+class Book : public PublicationWithDate, public Sales{
 private:
     int page_count;
 public:
     Book(): page_count(0) {}
 
-    Book(char* str, float c, int count): page_count(count), Publication(str, c) {}
+    Book(char* str, float c, int count, char* dat): page_count(count), PublicationWithDate(str, c, dat) {}
 
     void getData() {
-        Publication::getData();
+        PublicationWithDate::getData();
         cout << "Print page count: ";
         cin >> page_count;
         Sales::getData();
     }
 
     void putData() const {
-        Publication::putData();
+        PublicationWithDate::putData();
         cout << "Page count: " << page_count << endl;
         Sales::putData();
     }
 };
 
-class Type : public Publication, public Sales{
+class Type : public PublicationWithDate, public Sales{
 private:
     float time_recording;
 public:
-    Type() : Publication(), time_recording(0.0) {}
+    Type() : PublicationWithDate(), time_recording(0.0) {}
 
-    Type(char* str, float c, float t): Publication(str, c), time_recording(t) {}
+    Type(char* str, float c, float t, char* dat): PublicationWithDate(str, c, dat), time_recording(t) {}
 
     void getData() {
-        Publication::getData();
+        PublicationWithDate::getData();
         cout << "Print time recording: ";
         cin >> time_recording;
         Sales::getData();
     }
 
     void putData() const {
-        Publication::putData();
+        PublicationWithDate::putData();
         cout << "Time recording: " << time_recording << endl;
         Sales::putData();
     }
