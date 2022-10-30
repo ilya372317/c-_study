@@ -62,6 +62,7 @@ add_executable(pointer_person src/chapter_10/pointer_person.cpp)
 add_executable(linked_list src/chapter_10/linked_list.cpp)
 add_executable(person_sorting src/chapter_10/person_sorting.cpp)
 add_executable(question_10 src/chapter_10/question.cpp)
+add_executable(middle_float src/chapter_10/middle_float.cpp)
 
 find_package(fmt REQUIRED)
 if (fmt_FOUND)
