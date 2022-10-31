@@ -19,9 +19,21 @@ public:
 	first = NULL;
     }
     
+
+    ~LinkList() {
+        link* current = first;
+        while (current) {
+	    link* next = current->next;
+	    cout << "delete item {" << current->data << "}" << endl;
+	    delete current;
+	    current = next;
+        }
+    }
+
     void addItem(int d);
     void display();
 };
+
 
 void LinkList::addItem(int d) {
     link* newLink = new link;

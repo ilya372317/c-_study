@@ -63,6 +63,8 @@ add_executable(linked_list src/chapter_10/linked_list.cpp)
 add_executable(person_sorting src/chapter_10/person_sorting.cpp)
 add_executable(question_10 src/chapter_10/question.cpp)
 add_executable(middle_float src/chapter_10/middle_float.cpp)
+add_executable(sort_day_of_week src/chapter_10/sort_day_of_weeks.cpp)
+add_executable(transfer_array src/chapter_10/transfer_array.cpp)
 
 find_package(fmt REQUIRED)
 if (fmt_FOUND)
