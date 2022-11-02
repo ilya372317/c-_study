@@ -16,7 +16,7 @@ private:
     link* first;
 public:
     LinkList() {
-	first = NULL;
+	first = nullptr;
     }
     
 
@@ -38,8 +38,20 @@ public:
 void LinkList::addItem(int d) {
     link* newLink = new link;
     newLink->data = d;
-    newLink->next = first;
-    first = newLink;
+    newLink->next = nullptr;
+
+    if (!first) {
+        first = newLink;
+    } else {
+        link* current = first;
+        while (current) {
+            if (!current->next) {
+                current->next = newLink;
+                break;
+            }
+            current = current->next;
+        }
+    }
 }
 
 void LinkList::display() {
