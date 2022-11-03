@@ -67,6 +67,7 @@ add_executable(sort_day_of_week src/chapter_10/sort_day_of_weeks.cpp)
 add_executable(transfer_array src/chapter_10/transfer_array.cpp)
 add_executable(compare_string src/chapter_10/compare_string.cpp)
 add_executable(slice_array src/chapter_10/slice_array.cpp)
+add_executable(chapter_10_array src/chapter_10/custom_array.cpp)
 
 find_package(fmt REQUIRED)
 if (fmt_FOUND)
