@@ -68,6 +68,8 @@ add_executable(transfer_array src/chapter_10/transfer_array.cpp)
 add_executable(compare_string src/chapter_10/compare_string.cpp)
 add_executable(slice_array src/chapter_10/slice_array.cpp)
 add_executable(chapter_10_array src/chapter_10/custom_array.cpp)
+add_executable(test_virtual_functions src/chapter_11/test_virtual_functions.cpp)
+add_executable(virtual_person src/chapter_11/virtual_person.cpp)
 
 find_package(fmt REQUIRED)
 if (fmt_FOUND)
