@@ -70,6 +70,8 @@ add_executable(slice_array src/chapter_10/slice_array.cpp)
 add_executable(chapter_10_array src/chapter_10/custom_array.cpp)
 add_executable(test_virtual_functions src/chapter_11/test_virtual_functions.cpp)
 add_executable(virtual_person src/chapter_11/virtual_person.cpp)
+add_executable(friend_function src/chapter_11/friend_class.cpp)
+add_executable(no_friend_distance src/chapter_11/no_friend_distance.cpp)
 
 find_package(fmt REQUIRED)
 if (fmt_FOUND)
