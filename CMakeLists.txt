@@ -72,6 +72,8 @@ add_executable(test_virtual_functions src/chapter_11/test_virtual_functions.cpp)
 add_executable(virtual_person src/chapter_11/virtual_person.cpp)
 add_executable(friend_function src/chapter_11/friend_class.cpp)
 add_executable(no_friend_distance src/chapter_11/no_friend_distance.cpp)
+add_executable(static_function src/chapter_11/static_function.cpp)
+add_executable(maga_string src/chapter_11/mega_string.cpp)
 
 find_package(fmt REQUIRED)
 if (fmt_FOUND)
