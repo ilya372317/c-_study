@@ -152,7 +152,7 @@ void testGetDataInWhile() {
         } else if (bookOrTape == 't') {
             publicationArray[counter] = new Type();
         } else {
-            cout << "Control character incorrect, please use \"b\" or \"t\"" << endl;
+            cout << R"(Control character incorrect, please use "b" or "t")" << endl;
             continue;
         }
 

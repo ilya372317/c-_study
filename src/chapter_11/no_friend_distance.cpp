@@ -3,6 +3,7 @@
 //
 
 #include "iostream"
+#include <gtest/gtest.h>
 
 using namespace std;
 
@@ -20,13 +21,19 @@ public:
 
     Distance(int ft, float inc): feet(ft), inches(inc) {}
 
-    void showdist() {
+    void showdist() const {
 	cout << feet << "\'-" << inches << '\"';
     }
 
     friend Distance operator+ (Distance, Distance);
 
+    friend Distance operator* (Distance, Distance);
+
     friend float square(Distance);
+
+    int getFeet() const;
+
+    float getInches() const;
 };
 
 Distance operator+(Distance d1, Distance d2) {
@@ -37,7 +44,27 @@ Distance operator+(Distance d1, Distance d2) {
 	f++;
     }
 
-    return Distance(f,i);
+    return {f,i};
+}
+
+Distance operator*(Distance d1, Distance d2) {
+    int f = d1.feet * d2.feet;
+    float i = d1.inches * d2.inches;
+
+    while (i > 12.0) {
+        i -= 12.0;
+        f++;
+    }
+
+    return {f, i};
+}
+
+int Distance::getFeet() const {
+    return feet;
+}
+
+float Distance::getInches() const {
+    return inches;
 }
 
 float square(Distance d) {
@@ -46,26 +73,15 @@ float square(Distance d) {
     return feetsqrd;
 }
 
+TEST(DistanceTest, multiply) {
+    Distance d1 = 1.1 * 2.2;
+
+    EXPECT_EQ(2, d1.getFeet());
+    EXPECT_FLOAT_EQ(5.04, d1.getInches());
+}
+
 int main() {
-    Distance d1(2.5f);
-    Distance d2(1.25f);
-    Distance d3;
-
-    cout << endl << "d1 = ";
-    d1.showdist();
-    cout << endl << "d2 = ";
-    d2.showdist();
-
-    d3 = d1 + 10.0f;
-
-    cout << endl << "d3 = ";
-    d3.showdist();
-
-    d3 = 10.1f + d1;
-
-    cout << endl << "d3 = ";
-    d3.showdist();
-
-    cout << endl << "d3 square = " << square(d3);
+    ::testing::InitGoogleTest();
+    return RUN_ALL_TESTS();
 }
 

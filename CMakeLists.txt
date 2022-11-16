@@ -90,14 +90,19 @@ add_executable(no_friend_distance src/chapter_11/no_friend_distance.cpp)
 add_executable(static_function src/chapter_11/static_function.cpp)
 add_executable(maga_string src/chapter_11/mega_string.cpp)
 add_executable(virtual_publication src/chapter_11/virtual_pulbication.cpp)
+add_executable(my_array src/chapter_11/class_array.cpp)
 
 target_link_libraries(
         test_distance
         GTest::gtest_main
 )
 
+target_link_libraries(no_friend_distance GTest::gtest_main)
+target_link_libraries(my_array GTest::gtest_main)
+
 include(GoogleTest)
 gtest_discover_tests(test_distance)
+gtest_discover_tests(no_friend_distance)
 
 find_package(fmt REQUIRED)
 if (fmt_FOUND)
