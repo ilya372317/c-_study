@@ -14,7 +14,7 @@ public:
 
     Employee(int num, float sal) : number(num), salary(sal) {}
 
-    [[nodiscard]] int getNumber() const {
+    [[nodiscafd]] int getNumber() const {
         return number;
     }
 

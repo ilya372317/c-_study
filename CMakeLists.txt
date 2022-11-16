@@ -6,13 +6,28 @@ set(CMAKE_MODULE_PATH "${CMAKE_BINARY_DIR}${CMAKE_MODULE_PATH}")
 
 set(PROJECT_NAME "learn_c++")
 
+set (CMAKE_CXX_STANDARD 14)
+
+include(FetchContent)
+FetchContent_Declare(
+        googletest
+        URL https://github.com/google/googletest/archive/03597a01ee50ed33e9dfd640b249b4be3799d395.zip
+)
+
+FetchContent_MakeAvailable(googletest)
+
+enable_testing()
+
+add_executable(
+        test_distance
+        tests/chapter_11/test_distance_class.cc
+)
 add_executable(${PROJECT_NAME} src/chapter_5/convert_time_to_second.cpp)
 add_executable(time_to_second_converter src/chapter_5/convert_time_to_second.cpp)
 add_executable(celiac_converter src/chapter_5/celsia_converter.cpp src/chapter_5/celsia_converter.cpp)
 add_executable(second_to_time_converter src/chapter_5/second_to_time_converter.cpp)
 add_executable(small_job src/chapter_6/small_job.cpp)
 add_executable(distance_class src/chapter_6/distance.cpp)
-add_executable(costume_int src/chapter_6/int_type.cpp)
 add_executable(toll_booth src/chapter_6/toll_booth.cpp)
 add_executable(time_adding src/chapter_6/time.cpp)
 add_executable(employee src/chapter_6/employ.cpp)
@@ -74,6 +89,15 @@ add_executable(friend_function src/chapter_11/friend_class.cpp)
 add_executable(no_friend_distance src/chapter_11/no_friend_distance.cpp)
 add_executable(static_function src/chapter_11/static_function.cpp)
 add_executable(maga_string src/chapter_11/mega_string.cpp)
+add_executable(virtual_publication src/chapter_11/virtual_pulbication.cpp)
+
+target_link_libraries(
+        test_distance
+        GTest::gtest_main
+)
+
+include(GoogleTest)
+gtest_discover_tests(test_distance)
 
 find_package(fmt REQUIRED)
 if (fmt_FOUND)

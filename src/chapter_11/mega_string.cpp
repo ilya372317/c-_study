@@ -79,7 +79,7 @@ public:
 int main() {
     char str[] = "This is very simple string";
 
-    String s3 = str;
+    String s3(str);
 
     cout << endl << "s3 = ";
     s3.display();

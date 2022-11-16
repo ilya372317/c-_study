@@ -3,3 +3,4 @@ cmake-build-debug/
 .cproject
 .project
 .settings/
+/cmake-build-debug-macos/
