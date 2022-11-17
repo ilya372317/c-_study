@@ -44,6 +44,8 @@ TEST(BigM, testConstructorWithDigitString) {
     auto* bigMoneyPtr = new BigMoney(digitString);
 
     EXPECT_DOUBLE_EQ(3000000000, bigMoneyPtr->getMoney());
+
+    delete bigMoneyPtr;
 }
 
 TEST(BigM, testConstructorWithNonDigitString) {
@@ -51,6 +53,8 @@ TEST(BigM, testConstructorWithNonDigitString) {
     auto* bigMoneyPtr = new BigMoney(nonDigitString);
 
     EXPECT_DOUBLE_EQ(3000.25, bigMoneyPtr->getMoney());
+
+    delete bigMoneyPtr;
 }
 
 int main() {
