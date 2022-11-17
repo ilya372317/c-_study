@@ -21,8 +21,8 @@ public:
         while (*s != '\0') {
             if (isdigit(*s) || *s == '.') {
                 *copyStr = *s;
+                copyStr++;
             }
-            copyStr++;
             s++;
         }
 
@@ -46,7 +46,12 @@ TEST(BigM, testConstructorWithDigitString) {
     EXPECT_DOUBLE_EQ(3000000000, bigMoneyPtr->getMoney());
 }
 
-//TODO make test constructor for non digit string
+TEST(BigM, testConstructorWithNonDigitString) {
+    char nonDigitString[] = "$3000.25 #";
+    auto* bigMoneyPtr = new BigMoney(nonDigitString);
+
+    EXPECT_DOUBLE_EQ(3000.25, bigMoneyPtr->getMoney());
+}
 
 int main() {
     ::testing::InitGoogleTest();
