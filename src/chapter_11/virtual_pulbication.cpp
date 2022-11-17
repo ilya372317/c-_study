@@ -27,6 +27,8 @@ public:
         cout << "Title: " << title.c_str() << endl;
         cout << "Coast: " << coast << endl;
     }
+
+    virtual void isOversize() const = 0;
 };
 
 class PublicationWithDate : public Publication {
@@ -37,17 +39,19 @@ protected:
 
     PublicationWithDate(char* tit, float coast, char* dat) : Publication(tit, coast), date(dat) {}
 
-    void getData() {
+    void getData() override {
         Publication::getData();
         cout << "Print date of publication: ";
         cin.ignore();
         getline(cin, date);
     }
 
-    void putData() const {
+    void putData() const override {
         Publication::putData();
         cout << "publication date: " << date << endl;
     }
+
+    void isOversize() const override = 0;
 };
 
 class Sales {
@@ -98,6 +102,12 @@ public:
         cout << "Page count: " << page_count << endl;
         Sales::putData();
     }
+
+    void isOversize() const {
+        if (page_count > 800) {
+            cout << "Is very long book!" << endl;
+        }
+    }
 };
 
 class Type : public PublicationWithDate, public Sales{
@@ -120,6 +130,12 @@ public:
         cout << "Time recording: " << time_recording << endl;
         Sales::putData();
     }
+
+    void isOversize() const {
+        if (time_recording > 300) {
+            cout << "Is very long tape!";
+        }
+    }
 };
 
 void testGetDataFromPublication();
@@ -131,9 +147,6 @@ void testGetDataFromBook();
 void testGetDataInWhile();
 
 int main() {
-//    testGetDataFromPublication();
-//    testGetDataFromType();
-//    testGetDataFromBook();
     testGetDataInWhile();
 }
 
@@ -165,30 +178,6 @@ void testGetDataInWhile() {
 
     for (int i = 0; i < counter; i++) {
         publicationArray[i]->putData();
+        (*(publicationArray + i))->isOversize();
     }
-}
-
-void testGetDataFromPublication() {
-    Publication publication;
-
-    publication.getData();
-    publication.putData();
-
-    cout << endl << "Get data from publication work fine!" << endl << endl;
-}
-
-void testGetDataFromType() {
-    Type type;
-    type.getData();
-    type.putData();
-
-    cout << endl << "Get data from type work fine!" << endl << endl;
-}
-
-void testGetDataFromBook() {
-    Book book;
-    book.getData();
-    book.putData();
-
-    cout << endl << "Get data from book work fine!" << endl << endl;
 }

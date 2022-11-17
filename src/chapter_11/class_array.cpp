@@ -32,6 +32,10 @@ public:
         }
 
         ptr = new int [arr1.size];
+        for (int i = 0; i < arr1.size; i++) {
+            *(ptr + i) = *(arr1.ptr + i);
+        }
+
         size = arr1.size;
 
         return *this;
@@ -42,6 +46,10 @@ public:
     }
 
     int& operator[] (int j) {
+        if (j >= size) {
+            cout << "Out of bounds!" << endl;
+            exit(1);
+        }
         return *(ptr + j);
     }
 };
@@ -66,7 +74,22 @@ TEST(class_array, testOperatorBrace) {
     EXPECT_EQ(arr[9], 81);
 }
 
-//TODO: write test for copy constructor
+TEST(classArray, copyConstructorAndAssigmentOperator) {
+    Array arr1(10);
+    for (int i = 0; i < 10; i++) {
+        arr1[i] = i*i;
+    }
+
+    Array arr2(20);
+    Array arr3 = arr2 = arr1;
+
+    for (int i = 0; i < 10; i++) {
+        EXPECT_EQ(arr1[0], 0);
+        EXPECT_EQ(arr2[1], 1);
+        EXPECT_EQ(arr3[3], 9);
+        EXPECT_EQ(arr3[5], 25);
+    }
+}
 
 int main() {
     ::testing::InitGoogleTest();

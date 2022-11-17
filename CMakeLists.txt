@@ -91,6 +91,7 @@ add_executable(static_function src/chapter_11/static_function.cpp)
 add_executable(maga_string src/chapter_11/mega_string.cpp)
 add_executable(virtual_publication src/chapter_11/virtual_pulbication.cpp)
 add_executable(my_array src/chapter_11/class_array.cpp)
+add_executable(big_money src/chapter_11/virtual_money.cpp)
 
 target_link_libraries(
         test_distance
@@ -99,6 +100,7 @@ target_link_libraries(
 
 target_link_libraries(no_friend_distance GTest::gtest_main)
 target_link_libraries(my_array GTest::gtest_main)
+target_link_libraries(big_money GTest::gtest_main)
 
 include(GoogleTest)
 gtest_discover_tests(test_distance)
