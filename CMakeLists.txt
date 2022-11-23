@@ -93,6 +93,7 @@ add_executable(virtual_publication src/chapter_11/virtual_pulbication.cpp)
 add_executable(my_array src/chapter_11/class_array.cpp)
 add_executable(big_money src/chapter_11/virtual_money.cpp)
 add_executable(first_io_stream src/chapter_12/first_io_script.cpp)
+add_executable(test_ios src/chapter_12/test_ios.cpp)
 
 target_link_libraries(
         test_distance
