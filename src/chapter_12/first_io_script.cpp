@@ -40,6 +40,8 @@ public:
         strcpy(result, tempUserString);
         result += '\0';
 
+        delete [] tempUserString;
+
         return result;
     }
 };
