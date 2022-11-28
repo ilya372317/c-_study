@@ -68,6 +68,7 @@ void Distance::getDist() {
     }
 }
 
+
 bool isFeet(string str) {
     int strLen = str.size();
     if (strLen == 0 || strLen > 5) {
