@@ -98,6 +98,8 @@ add_executable(get_integer src/chapter_12/get_integer.cpp)
 add_executable(ios_distance src/chapter_12/ios_distance.cpp)
 add_executable(file_write src/chapter_12/file_write.cpp)
 add_executable(person_file src/chapter_12/person_file.cpp)
+add_executable(file_write_error src/chapter_12/file_write_error.cpp)
+add_executable(employee_file src/chapter_12/employee_file.cpp)
 
 target_link_libraries(
         test_distance

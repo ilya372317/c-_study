@@ -20,6 +20,9 @@ public:
 
     void getData();
     void showData() const;
+    void diskIn(int);
+    void diskOut() const;
+    int diskCount() const;
 };
 
 void Person::showData() const {
@@ -54,18 +57,75 @@ void Person::getData() {
     }
 }
 
+void Person::diskIn(int personNumber) {
+    ifstream is;
+    is.open("PERSON_DATA.txt", ios::binary);
+
+    if (!is) {
+        cerr << "Failed to open file PERSON_DATA.txt" << endl;
+        exit(1);
+    }
+    is.seekg(personNumber * sizeof(*this));
+
+    is.read((char*) this, sizeof(*this));
+
+    if (is.bad()) {
+        cerr << "Failed to read person from file" << endl;
+        exit(1);
+    }
+}
+
+void Person::diskOut() const {
+    ofstream os;
+    os.open("PERSON_DATA.txt", ios::binary | ios::app);
+
+    if (!os) {
+        cerr << "Failed for open PERSON_DATA.txt file" << endl;
+    }
+
+    os.write((char*) this, sizeof(*this));
+
+    if (os.bad()) {
+        cerr << "Failed to write in PERSON_DATA.txt file" << endl;
+        exit(1);
+    }
+}
+
+int Person::diskCount() const {
+    ifstream is;
+    is.open("PERSON_DATA.txt", ios::binary);
+    is.seekg(0, ios::end);
+
+    return (int) (is.tellg() / sizeof(*this));
+}
+
 void writeSeveralObject( const char* fileName);
 void readPersons(const char* fileName);
 void findPersonByNumber();
 
 int main() {
-//    const char* fileName = new char [] {"PERSON_DATA.txt"};
-//    writeSeveralObject(fileName);
-//    readPersons(fileName);
+    Person person;
+    char next;
 
+    do {
+        person.getData();
+        person.diskOut();
 
+        cout << "Next? [y/n] ";
+        cin >> next;
+        cin.ignore(10, '\n');
+    } while (next != 'n');
 
-    findPersonByNumber();
+    int n = person.diskCount();
+
+    cout << "In file system stored " << n << " persons" << endl;
+
+    for (int i = 0; i < n; i++) {
+        person.diskIn(i);
+        person.showData();
+    }
+    cout << endl;
+
     return 0;
 }
 
