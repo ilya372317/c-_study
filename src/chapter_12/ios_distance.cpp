@@ -5,6 +5,7 @@
 #include "iostream"
 #include "string"
 #include "cstdlib"
+#include "fstream"
 
 using namespace std;
 
@@ -24,7 +25,24 @@ public:
     }
 
     void getDist();
+
+    friend istream& operator>> (istream& is, Distance& d1);
+    friend ostream& operator<< (ostream& os, Distance& d1);
 };
+
+istream& operator>> (istream& is, Distance& d) {
+    char dummy;
+
+    is >> d.feet >> dummy >> dummy >> d.inches >> dummy;
+
+    return is;
+}
+
+ostream& operator<< (ostream& os, Distance& d) {
+    os << d.feet << "\'-" << d.inches << '\"';
+
+    return os;
+}
 
 void Distance::getDist() {
     string instr;
@@ -93,17 +111,30 @@ bool isFeet(string str) {
 int main() {
     auto* distancePtr = new Distance;
     char ans;
+    ofstream os;
+    char fileName[] = "DISTANCE_DATA.txt";
+//    os.open(fileName, ios::trunc);
 
-    do {
-        distancePtr->getDist();
-        cout << "Distance equals: ";
-        distancePtr->showDist();
-        cout << endl << "One more? (y/n) ";
-        cin >> ans;
-        cin.ignore(10, '\n');
-    } while (ans != 'n');
+//    do {
+//        distancePtr->getDist();
+//        cout << "Distance equals: ";
+//        distancePtr->showDist();
+//        os << *distancePtr;
+//        cout << endl << "One more? (y/n) ";
+//        cin >> ans;
+//        cin.ignore(10, '\n');
+//    } while (ans != 'n');
+//    os.close();
+    ifstream is;
+    is.open(fileName);
+    Distance distance1;
+    while (!is.eof()) {
+        is >> distance1;
+        distance1.showDist();
+        cout << endl;
+    }
+    is.close();
 
     delete distancePtr;
-
     return 0;
 }
