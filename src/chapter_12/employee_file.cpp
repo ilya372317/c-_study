@@ -4,6 +4,7 @@
 
 #include "iostream"
 #include "fstream"
+#include "cstring";
 
 using namespace std;
 
@@ -17,13 +18,20 @@ enum employee_type {
 };
 
 class employee {
-private:
-    char name[FIO_LEN];
+protected:
+    char name[FIO_LEN]{};
     unsigned long number;
     static int n;
     static employee* arrap[];
 
 public:
+    employee(): number(0) {}
+
+    employee(employee& e) {
+        strcpy(name, e.name);
+        number = e.number;
+    }
+
     virtual void get_data() {
         cin.ignore(10, '\n');
         cout << "Print surname: ";
@@ -38,7 +46,6 @@ public:
     }
 
     virtual employee_type get_type();
-    virtual void read_self(ifstream& is);
     static void add();
     static void display();
     static void read();
@@ -50,12 +57,14 @@ employee* employee::arrap[MAX_EMPLOYEE];
 
 class manager : public employee {
 private:
-    char title[FIO_LEN];
+    char title[FIO_LEN]{};
     double dues;
 public:
-    manager(char t[], double d) {
-        strcpy(title, t);
-        dues = d;
+    manager() : employee(), dues(0) {}
+
+    manager(manager& m)  : employee(m) {
+        strcpy(title, m.title);
+        dues = m.dues;
     }
 
     void get_data() override {
@@ -77,6 +86,12 @@ class scientist : public employee{
 private:
     int pubs;
 public:
+    scientist(): employee(), pubs(0) {}
+
+    scientist(scientist& s): employee(s) {
+        pubs = s.pubs;
+    }
+
     void get_data() override {
         employee::get_data();
         cout << "Print count of publication: ";
@@ -90,12 +105,11 @@ public:
 };
 
 class laborer : public employee {
-    int count = 1;
-};
+public:
+    laborer() : employee() {}
 
-void employee::read_self(ifstream &is) {
-    is.read((char*) this, sizeof(*this));
-}
+    laborer (laborer& l): employee(l) {}
+};
 
 void employee::add() {
     char ch;
@@ -122,7 +136,6 @@ void employee::add() {
     }
 
     arrap[n++]->get_data();
-    int test = 0;
 }
 
 employee_type employee::get_type() {
@@ -145,9 +158,6 @@ employee_type employee::get_type() {
 void employee::display() {
     for (int i = 0; i < n; i++) {
         cout << (i + 1);
-        int testn = n;
-        employee* testarr[100];
-        testarr[i] = arrap[i];
         switch (arrap[i]->get_type()) {
             case tmanager:
                 cout << " Type manager" << endl;
@@ -237,26 +247,28 @@ void employee::read() {
             cerr << "Failed read type from file" << endl;
             exit(1);
         }
-        char test[] = "";
-        auto* tempManager = new manager(test, 20.2);
+
+        auto* tempManager = new manager;
+        auto* tempScientist = new scientist;
+        auto* tempLaborer = new laborer;
 
         switch (etype) {
             case tmanager:
-                arrap[n] = new manager;
+                is.read((char*) tempManager, sizeof (manager));
+                arrap[n] = new manager(*tempManager);
                 break;
             case tscientist:
-                arrap[n] = new scientist;
-                size = sizeof(scientist);
+                is.read((char*) tempScientist, sizeof (scientist));
+                arrap[n] = new scientist(*tempScientist);
                 break;
             case tlaborer:
-                arrap[n] = new laborer;
-                size = sizeof(laborer);
+                is.read((char*) tempLaborer, sizeof (laborer));
+                arrap[n] = new laborer(*tempLaborer);
                 break;
             default:
                 cerr << "Unknown type" << endl;
                 exit(1);
         }
-        arrap[n]->read_self(is);
 
         if (!is) {
             cerr << "Fail read employee form file" << endl;

@@ -6,7 +6,7 @@ set(CMAKE_MODULE_PATH "${CMAKE_BINARY_DIR}${CMAKE_MODULE_PATH}")
 
 set(PROJECT_NAME "learn_c++")
 
-set (CMAKE_CXX_STANDARD 14)
+set (CMAKE_CXX_STANDARD 17)
 
 include(FetchContent)
 FetchContent_Declare(
