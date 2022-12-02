@@ -100,6 +100,11 @@ add_executable(file_write src/chapter_12/file_write.cpp)
 add_executable(person_file src/chapter_12/person_file.cpp)
 add_executable(file_write_error src/chapter_12/file_write_error.cpp)
 add_executable(employee_file src/chapter_12/employee_file.cpp)
+add_executable(ios_string src/chapter_12/ios_string.cpp)
+add_executable(command_line_argument src/chapter_12/command_line_argument.cpp)
+add_executable(read_file src/chapter_12/read_file.cpp)
+add_executable(copy_file src/chapter_12/copy.cpp)
+add_executable(file_size src/chapter_12/file_size.cpp)
 
 target_link_libraries(
         test_distance

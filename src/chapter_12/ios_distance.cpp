@@ -113,18 +113,18 @@ int main() {
     char ans;
     ofstream os;
     char fileName[] = "DISTANCE_DATA.txt";
-//    os.open(fileName, ios::trunc);
+    os.open(fileName);
 
-//    do {
-//        distancePtr->getDist();
-//        cout << "Distance equals: ";
-//        distancePtr->showDist();
-//        os << *distancePtr;
-//        cout << endl << "One more? (y/n) ";
-//        cin >> ans;
-//        cin.ignore(10, '\n');
-//    } while (ans != 'n');
-//    os.close();
+    do {
+        distancePtr->getDist();
+        cout << "Distance equals: ";
+        distancePtr->showDist();
+        os << *distancePtr;
+        cout << endl << "One more? (y/n) ";
+        cin >> ans;
+        cin.ignore(10, '\n');
+    } while (ans != 'n');
+    os.close();
     ifstream is;
     is.open(fileName);
     Distance distance1;
