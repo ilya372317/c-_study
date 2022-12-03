@@ -105,6 +105,14 @@ add_executable(command_line_argument src/chapter_12/command_line_argument.cpp)
 add_executable(read_file src/chapter_12/read_file.cpp)
 add_executable(copy_file src/chapter_12/copy.cpp)
 add_executable(file_size src/chapter_12/file_size.cpp)
+add_executable(human_file src/chapter_12/human_file.cpp)
+add_executable(file_time src/chapter_12/file_time.cpp)
+add_executable(name_file src/chapter_12/name_file.cpp)
+
+target_link_libraries(
+        ${PROJECT_NAME}
+        ${CONAN_LIBS}
+)
 
 target_link_libraries(
         test_distance
@@ -115,6 +123,7 @@ target_link_libraries(no_friend_distance GTest::gtest_main)
 target_link_libraries(my_array GTest::gtest_main)
 target_link_libraries(big_money GTest::gtest_main)
 target_link_libraries(first_io_stream GTest::gtest_main)
+target_link_libraries(name_file sfml-graphics)
 
 include(GoogleTest)
 gtest_discover_tests(test_distance)
@@ -136,4 +145,11 @@ find_package(GTest REQUIRED)
 if (GTest_FOUND)
     target_include_directories(${PROJECT_NAME} PRIVATE ${GTest_INCLUDE_DIRS})
     target_link_libraries(${PROJECT_NAME} PRIVATE ${GTest_LIBRARIES})
+endif()
+
+find_package(SFML REQUIRED)
+
+if (SFML_FOUND)
+    target_include_directories(${PROJECT_NAME} PRIVATE ${SFML_INCLUDE_DIRS})
+    target_link_libraries(${PROJECT_NAME} PRIVATE ${SFML_LIBRARIES})
 endif()
